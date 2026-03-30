@@ -1,0 +1,3 @@
+[options]
+buildCommand = "npm ci && npm run build"
+startCommand = "node .output/server/index.mjs"
