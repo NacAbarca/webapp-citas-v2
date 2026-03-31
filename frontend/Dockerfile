@@ -3,13 +3,12 @@ FROM node:22-slim
 WORKDIR /app
 
 COPY frontend/package.json ./
-COPY frontend/package-lock.json ./
 
-RUN npm install
+RUN npm install --ignore-scripts=false
 
 COPY frontend/ .
 
-RUN npm run build 2>&1 || (echo "BUILD FAILED" && exit 1)
+RUN npm run build
 
 EXPOSE 3000
 
