@@ -5,7 +5,9 @@ WORKDIR /app
 COPY frontend/package.json ./
 COPY frontend/package-lock.json ./
 
-RUN npm ci
+RUN npm ci && \
+    rm -rf node_modules/oxc-parser && \
+    npm install oxc-parser --no-save
 
 COPY frontend/ .
 
