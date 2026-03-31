@@ -1,3 +1,5 @@
-[options]
-buildCommand = "npm ci"
-startCommand = "node src/app.js"
+[build]
+cmd = "npm ci"
+
+[start]
+cmd = "node src/app.js"
