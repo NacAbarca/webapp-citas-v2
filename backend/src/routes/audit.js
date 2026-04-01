@@ -7,14 +7,13 @@ const router = Router();
 // GET /api/audit/login-logs  — admin only
 router.get('/login-logs', requireRole('admin'), async (req, res) => {
   try {
-    const limit = parseInt(req.query.limit) || 50;
+    const limit = Math.max(1, Math.min(parseInt(req.query.limit) || 50, 500));
 
-    const [rows] = await db.execute(
+    const [rows] = await db.query(
       `SELECT id, user_id, email, ip, user_agent, success, created_at
        FROM login_logs
        ORDER BY created_at DESC
-       LIMIT ?`,
-      [limit]
+       LIMIT ${limit}`
     );
 
     res.json({ ok: true, data: { logs: rows } });
