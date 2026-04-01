@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import db from '../db.js';
 import { requireRole } from '../middleware/auth.js';
+import { parseDMY } from '../utils/dates.js';
 
 const router     = Router();
 const STAFF_ADMIN = requireRole('admin', 'staff');
@@ -51,7 +52,7 @@ router.post('/', STAFF_ADMIN, async (req, res) => {
     nombres,
     normStr(body.apellido_paterno),
     normStr(body.apellido_materno),
-    normStr(body.fecha_nacimiento),
+    parseDMY(body.fecha_nacimiento),
     body.edad                    != null ? Number(body.edad)                    : null,
     body.porcentaje_discapacidad != null ? Number(body.porcentaje_discapacidad) : 0,
     normStr(body.condiciones),
@@ -95,7 +96,7 @@ router.put('/:id_paciente', STAFF_ADMIN, async (req, res) => {
     String(body.nombres ?? '').trim() || null,
     normStr(body.apellido_paterno),
     normStr(body.apellido_materno),
-    normStr(body.fecha_nacimiento),
+    parseDMY(body.fecha_nacimiento),
     body.edad                    != null ? Number(body.edad)                    : null,
     body.porcentaje_discapacidad != null ? Number(body.porcentaje_discapacidad) : 0,
     normStr(body.condiciones),
