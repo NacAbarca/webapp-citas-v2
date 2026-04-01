@@ -378,12 +378,13 @@ mysql -h $RAILWAY_HOST -P $RAILWAY_PORT -u $RAILWAY_USER \
 | v1.0.0 | Commit inicial: estructura base, autenticación, CRUD completo de citas, pacientes y usuarios, control de roles, modal de perfil, auditoría |
 | v1.0.1 | Fix `railpack.toml`: formato `[phases.build]` correcto para detección Railway/Railpack |
 | v1.0.2 | Limpieza de `start.sh`, README profesional completo |
+| v1.1.0 | Deploy completo en Railway con Dockerfile, CORS cross-domain, cookies JWT producción |
 
 ---
 
 ## Estado del Proyecto
 
-### Completado (v1.0.2)
+### ✅ Completado (v1.1.0)
 
 - Autenticación JWT con cookie httpOnly
 - CRUD completo de Citas, Pacientes, Usuarios
@@ -391,26 +392,28 @@ mysql -h $RAILWAY_HOST -P $RAILWAY_PORT -u $RAILWAY_USER \
 - Modal de perfil + cambio de contraseña
 - Auditoría de login (solo admin)
 - Migración de datos desde DB legacy (Webapp PHP)
-- Deploy en Railway con Railpack
+- Deploy completo en Railway (backend + frontend + MySQL)
+- CORS configurado para cross-domain con cookies JWT (`sameSite: none`, `secure: true`)
 - Script de migración DB local → Railway
 - Colección Postman para testing de API
 
-### En Progreso
+### 🔴 Alta prioridad (próximo fix)
 
-- Configuración Root Directory en Railway (pendiente verificar build)
-- Variables de entorno en Railway dashboard
+- Bootstrap Icons faltantes (`bi bi-*`) — afecta apariencia de todos los botones de acción
+- Columnas Sector / Intérprete / Tipo atención en tabla de citas
+- Botón eliminar (soft delete) en tabla de usuarios
 
-### Próximos Sprints
+### 🟡 Media prioridad
 
-- Historial de cambios de estado por cita (tabla `appointment_status_history`)
-- Notificaciones por email (citas confirmadas/canceladas)
-- PWA / modo offline
-- Tests unitarios backend (Jest)
-- Tests e2e frontend (Playwright)
-- Búsqueda y filtros avanzados en citas y pacientes
-- Dashboard con métricas (admin)
-- Exportar reportes PDF/Excel
-- Conectar dominio personalizado en Railway
+- Modal de edición completa de cita existente
+- Selector de intérprete en formulario de nueva cita
+- Botón desactivar/eliminar en tabla de pacientes
+
+### 🟢 Baja prioridad
+
+- Filtro de fechas dinámico en citas (actualmente hardcodeado a 2026)
+- Footer © 2025–2026
+- Búsqueda global en navbar
 
 ---
 
