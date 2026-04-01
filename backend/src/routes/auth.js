@@ -6,10 +6,11 @@ import { verifyToken } from '../middleware/auth.js';
 
 const router = Router();
 
+const IS_PROD = process.env.NODE_ENV === 'production';
 const COOKIE_OPTS = {
   httpOnly: true,
-  secure:   process.env.NODE_ENV === 'production',
-  sameSite: 'lax',
+  secure:   IS_PROD,
+  sameSite: IS_PROD ? 'none' : 'lax',
   maxAge:   24 * 60 * 60 * 1000, // 24h
 };
 
