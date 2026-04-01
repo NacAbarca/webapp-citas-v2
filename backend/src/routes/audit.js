@@ -6,17 +6,22 @@ const router = Router();
 
 // GET /api/audit/login-logs  — admin only
 router.get('/login-logs', requireRole('admin'), async (req, res) => {
-  const limit = parseInt(req.query.limit) || 50;
+  try {
+    const limit = parseInt(req.query.limit) || 50;
 
-  const [logs] = await db.execute(
-    `SELECT id, user_id, email, ip, user_agent, success, created_at
-     FROM login_logs
-     ORDER BY created_at DESC
-     LIMIT ?`,
-    [limit]
-  );
+    const [rows] = await db.execute(
+      `SELECT id, user_id, email, ip, user_agent, success, created_at
+       FROM login_logs
+       ORDER BY created_at DESC
+       LIMIT ?`,
+      [limit]
+    );
 
-  res.json({ ok: true, data: { logs } });
+    res.json({ ok: true, data: { logs: rows } });
+  } catch (err) {
+    console.error('Audit error:', err);
+    res.status(500).json({ ok: false, error: { message: 'DB error', details: err.message } });
+  }
 });
 
 export default router;
